@@ -28,32 +28,30 @@ def home():
 def run_flask():
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
 
-# 🤖 2. แกนหลักบอทสแลชคอมมานด์ (Slash Commands Setup)
+# ตรวจสอบโครงสร้างใน main.py ให้เยื้องตรงกันแบบนี้:
+
 class EpicMegaBot(commands.Bot):
     def __init__(self):
         intents = discord.Intents.all()
         super().__init__(command_prefix="/", intents=intents)
 
-async def setup_hook(self):
-        # โซนโหลด Cogs อัตโนมัติ (สามารถแตกไฟล์เพิ่มได้ถึง 200 ระบบ)
+    async def setup_hook(self):
         if not os.path.exists('./cogs'):
             os.makedirs('./cogs')
         
-        # ⚠️ เติมส่วนลูปสแกนและโหลดไฟล์ Cogs ตรงนี้เข้าไปด้วยครับ:
         for filename in os.listdir('./cogs'):
             if filename.endswith('.py'):
                 await self.load_extension(f'cogs.{filename[:-3]}')
                 print(f"📦 Loaded Cog: {filename}")
 
+    # ⚠️ เช็คบรรทัดนี้: คำว่า async ต้องอยู่แนวตั้งตรงกันเป๊ะกับ async def setup_hook ด้านบน
     async def on_ready(self):
         print(f"🟢 {self.user.name} ออนไลน์และพร้อมใช้งานแล้ว!")
-        # 🔄 พอบอทออนจะรีคำสั่งสแลชทั้งหมดทันทีทั่วโลก
         try:
             synced = await self.tree.sync()
             print(f"🔄 รีเฟรชและ Sync คำสั่งสำเร็จ! (รวมทั้งหมด {len(synced)} คำสั่ง)")
         except Exception as e:
             print(f"❌ รีคำสั่งล้มเหลว: {e}")
-
 bot = EpicMegaBot()
 
 def init_dbs():

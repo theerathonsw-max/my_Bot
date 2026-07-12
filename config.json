@@ -1,0 +1,10 @@
+{
+  "TOKEN": "ใส่ TOKEN ของบอท Discord ที่นี่",
+  "PREFIX": "/",
+  "OWNER_ID": 0,
+  "VERSION": "3.0",
+  "SYSTEMS": 200,
+  "DEBUG": false,
+  "LOG_LEVEL": "INFO",
+  "DATABASE": "bot_data.db"
+}

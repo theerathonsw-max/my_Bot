@@ -34,11 +34,12 @@ class EpicMegaBot(commands.Bot):
         intents = discord.Intents.all()
         super().__init__(command_prefix="/", intents=intents)
 
-    async def setup_hook(self):
+async def setup_hook(self):
         # โซนโหลด Cogs อัตโนมัติ (สามารถแตกไฟล์เพิ่มได้ถึง 200 ระบบ)
         if not os.path.exists('./cogs'):
             os.makedirs('./cogs')
         
+        # ⚠️ เติมส่วนลูปสแกนและโหลดไฟล์ Cogs ตรงนี้เข้าไปด้วยครับ:
         for filename in os.listdir('./cogs'):
             if filename.endswith('.py'):
                 await self.load_extension(f'cogs.{filename[:-3]}')
